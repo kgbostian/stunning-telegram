@@ -20,12 +20,16 @@ prp();
 --print("Reseting Pathways.")
 --resetPathways()
 
+-- Debug controls -- 
+debug_control(true)
+
 -- Testing Mining function -- 
+
 print("Starting Mining Functions.")
 digProspectWindow(8)
+stripMine()
 --
 pp();
-reversePath();
 prp();
 
 

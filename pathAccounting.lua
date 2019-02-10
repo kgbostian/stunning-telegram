@@ -21,10 +21,8 @@ end
 
 -- Add action to Path list --
 function updatePath(action)
-    print("Updating Pathway with Action: ", action)
     pathway = pathway .. action
     prunePathway(action)
-    print("Pathway after update is: ", pathway)
 end
 
 
@@ -47,6 +45,7 @@ end
 
 -- Reverse Action Path -- 
 function reversePath()
+    wayHome = ''
     reverse = string.reverse(pathway)
     for c in string.gmatch(reverse, '.') do
     	wayHome = wayHome .. reverseStep(c)

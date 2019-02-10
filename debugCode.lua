@@ -7,12 +7,21 @@ function prp()
 end
 
 function dig()
-    print("Dig")
+    --print("Dig")
 end
 function digDown()
-    print("Dig Down")
+    --print("Dig Down")
 end
 function digUp()
-    print("Dig Up")
+    --print("Dig Up")
 end
 
+function debug_control(state)
+    if state == true then
+        debug_state = true
+    elseif state == false then
+        debug_state = false
+    else
+        print("Failed to set debug control: ", state)
+    end
+end
