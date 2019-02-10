@@ -1,4 +1,5 @@
 require("mine")
+require("debugCode")
 
 direction = 0
 turnRight()
@@ -10,10 +11,21 @@ turnLeft()
 turnLeft()
 turnLeft()
 moveForward()
-
 reversePath()
-digDown()
---pp();
---prp()
+pp();
+prp();
+
+
+
+--print("Reseting Pathways.")
+--resetPathways()
+
+-- Testing Mining function -- 
+print("Starting Mining Functions.")
+digProspectWindow(8)
+--
+pp();
+reversePath();
+prp();
 
 

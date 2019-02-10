@@ -1,6 +1,3 @@
-pathway = ''
-wayHome = ''
-
 require("debug")
 require("pathAccounting")
 
@@ -27,11 +24,12 @@ function backUp(distance)
     end
 end
 
-function digProspectWindow()
-    for a=0,8,1 do
+function digProspectWindow(dist)
+    for a=1,dist,1 do
         dig()
         moveForward()
     end
+    backUp(dist)
 end
 
 function prospect(dir)

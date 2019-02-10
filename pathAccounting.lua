@@ -1,8 +1,30 @@
 ----------------- Pathfinding ---------------------
+--
+--
+--
+pathway = ''
+wayHome = ''
+
+-- Reset variables --
+function resetPathways()
+    pathway = ''
+    wayHome = ''
+end
+
+-- Eliminate unneeded Movement -- 
+function prunePathway(action)
+    if string.sub(pathway,-2,-2) == reverseStep(action) then
+        pathway = string.sub(pathway,1, -3)
+    end
+end
+
+
 -- Add action to Path list --
 function updatePath(action)
+    print("Updating Pathway with Action: ", action)
     pathway = pathway .. action
-    print("Pathway = :", pathway);
+    prunePathway(action)
+    print("Pathway after update is: ", pathway)
 end
 
 
@@ -27,7 +49,7 @@ end
 function reversePath()
     reverse = string.reverse(pathway)
     for c in string.gmatch(reverse, '.') do
-	wayHome = wayHome .. reverseStep(c)
+    	wayHome = wayHome .. reverseStep(c)
     end
 end
 
