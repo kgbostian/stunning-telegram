@@ -52,6 +52,16 @@ function reversePath()
     end
 end
 
+function turn(dir)
+    if dir  == 'R' then
+	turnRight()
+    elseif dir == 'L' then
+        turnLeft()
+    else
+        print("Failed to turn in dir: ", dir)
+    end
+end
+
 
 function turnRight()
     --turtle.turnRight()
@@ -90,6 +100,18 @@ function updateDirection(turn)
     end
     direction = direction % 4
 end
+
+
+function move_fwd_to_pos(dist,dir,pos)
+    for a=1,dist,1 do
+        moveForward()
+    end
+    turn(dir)
+    pos = pos + dist
+    print("After move: ", pos)
+    return pos
+end
+
 
 ----------------- End pathfinding ------------------------
 

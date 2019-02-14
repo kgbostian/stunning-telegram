@@ -26,9 +26,10 @@ debug_control(true)
 -- Testing Mining function -- 
 
 print("Starting Mining Functions.")
-digProspectWindow(8)
-stripMine()
---
+mc = MineControl:new()
+mc.digProspectWindow(8)
+mc.stripMine()
+
 pp();
 prp();
 
