@@ -52,20 +52,21 @@ function MineControl.cut_square(size, dir)
     MineControl.turn_and_strip(dir, size)
     MineControl.turn_and_strip(dir, size)
     MineControl.turn_and_strip(dir, size)
+    MineControl.strip_hall_section(size)
 end
 
 function MineControl.cut_strip_mine(strip, starting_dir, size_of_mine)
     local pos = 1
     local dir = starting_dir
     pos = move_fwd_to_pos(strip,dir,pos)
-    print("pos = ", pos)
+    --print("pos = ", pos)
     while(pos < size_of_mine) do
         MineControl.strip_hall_section(size_of_mine)
-        print("Looping change dir, ", dir)
+        --print("Looping change dir, ", dir)
         dir = reverseStep(dir)
         turn(dir)
         pos = move_fwd_to_pos(strip,dir,pos)
-        print("pos: ", pos)
+        --print("pos: ", pos)
     end
 end
 

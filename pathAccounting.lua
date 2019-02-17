@@ -22,7 +22,7 @@ end
 -- Add action to Path list --
 function updatePath(action)
     pathway = pathway .. action
-    prunePathway(action)
+    --prunePathway(action)
 end
 
 
@@ -54,7 +54,7 @@ end
 
 function turn(dir)
     if dir  == 'R' then
-	turnRight()
+	    turnRight()
     elseif dir == 'L' then
         turnLeft()
     else
@@ -91,10 +91,10 @@ function updateDirection(turn)
     direction = direction + 4
     if turn == 'R' then
         direction = direction + 1
-	updatePath(turn)
+        updatePath(turn)
     elseif turn == 'L' then
         direction = direction - 1
-	updatePath(turn)
+        updatePath(turn)
     else
         print("Error: Bad direction")
     end

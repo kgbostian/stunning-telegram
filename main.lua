@@ -1,5 +1,6 @@
 require("mine")
 require("debugCode")
+require("maze")
 
 direction = 0
 turnRight()
@@ -15,6 +16,8 @@ reversePath()
 pp();
 prp();
 
+parse_movement(pathway)
+print_maze()
 
 
 --print("Reseting Pathways.")
@@ -27,10 +30,12 @@ debug_control(true)
 
 print("Starting Mining Functions.")
 mc = MineControl:new()
-mc.digProspectWindow(8)
-mc.stripMine()
+--mc.digProspectWindow(8)
+--mc.stripMine()
+mc.cut_square(16,'R')
 
 pp();
 prp();
 
-
+parse_movement(pathway)
+print_maze()
