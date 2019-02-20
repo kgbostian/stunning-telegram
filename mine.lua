@@ -1,53 +1,87 @@
-pathway = ''
-wayHome = ''
-
 require("debug")
 require("pathAccounting")
 
+
+MineControl = {}
+
+function MineControl:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
 -------------------- Mining Work -------------------------
-function digWalkway()
+function MineControl.digWalkway()
+    dig()
+    moveForward()
     digUp()
     digDown()
-    dig()
 end
 
-function turn(dir)
-    if dir  == 'R' then
-	turnRight()
-    elseif dir == 'L' then
-        turnLeft()
-    else
-        print("Failed to turn in dir: ", dir)
-    end
-end
-
-function backUp(distance)
+function MineControl.backUp(distance)
     for a=1,distance,1 do
         moveBackward()
     end
 end
 
-function digProspectWindow()
-    for a=0,8,1 do
+function MineControl.digProspectWindow(dist)
+    for a=1,dist,1 do
         dig()
         moveForward()
     end
 end
 
-function prospect(dir)
+function MineControl.prospect(dir)
     turn(dir)
     dig()
 end    
 
-function stripMine()
-    while(true) do
-        digWalkway()
-        moveForward()
-        digWalkway()
-	moveForward()
-	digWalkway()
-	moveForward()
+function MineControl.strip_hall_section(dist)
+    for a=1,dist,1 do
+        MineControl.digWalkway()
     end
+end
+
+function MineControl.turn_and_strip(dir, dist)
+    turn(dir)
+    MineControl.strip_hall_section(dist)
+end
+
+function MineControl.cut_square(size, dir)
+    MineControl.strip_hall_section(size)
+    MineControl.turn_and_strip(dir, size)
+    MineControl.turn_and_strip(dir, size)
+    MineControl.turn_and_strip(dir, size)
+    MineControl.strip_hall_section(size)
+end
+
+function MineControl.cut_strip_mine(strip, starting_dir, size_of_mine)
+    local pos = 1
+    local dir = starting_dir
+    pos = move_fwd_to_pos(strip,dir,pos)
+    --print("pos = ", pos)
+    while(pos < size_of_mine) do
+        MineControl.strip_hall_section(size_of_mine)
+        --print("Looping change dir, ", dir)
+        dir = reverseStep(dir)
+        turn(dir)
+        pos = move_fwd_to_pos(strip,dir,pos)
+        --print("pos: ", pos)
+    end
+end
+
+
+function MineControl.stripMine()
+    cont = true
+    local dir = 'R'
+    local size = 15
+    while(cont) do
+        MineControl.cut_square(size,dir)
+        MineControl.cut_strip_mine(3,dir, size)
+
+        cont = false
+    end
+    reversePath()
 end
 
 ------------------ End Mining Work -----------------------

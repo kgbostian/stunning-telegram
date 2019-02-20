@@ -1,8 +1,28 @@
 ----------------- Pathfinding ---------------------
+--
+--
+--
+pathway = ''
+wayHome = ''
+
+-- Reset variables --
+function resetPathways()
+    pathway = ''
+    wayHome = ''
+end
+
+-- Eliminate unneeded Movement -- 
+function prunePathway(action)
+    if string.sub(pathway,-2,-2) == reverseStep(action) then
+        pathway = string.sub(pathway,1, -3)
+    end
+end
+
+
 -- Add action to Path list --
 function updatePath(action)
     pathway = pathway .. action
-    print("Pathway = :", pathway);
+    --prunePathway(action)
 end
 
 
@@ -25,9 +45,20 @@ end
 
 -- Reverse Action Path -- 
 function reversePath()
+    wayHome = ''
     reverse = string.reverse(pathway)
     for c in string.gmatch(reverse, '.') do
-	wayHome = wayHome .. reverseStep(c)
+    	wayHome = wayHome .. reverseStep(c)
+    end
+end
+
+function turn(dir)
+    if dir  == 'R' then
+	    turnRight()
+    elseif dir == 'L' then
+        turnLeft()
+    else
+        print("Failed to turn in dir: ", dir)
     end
 end
 
@@ -60,15 +91,27 @@ function updateDirection(turn)
     direction = direction + 4
     if turn == 'R' then
         direction = direction + 1
-	updatePath(turn)
+        updatePath(turn)
     elseif turn == 'L' then
         direction = direction - 1
-	updatePath(turn)
+        updatePath(turn)
     else
         print("Error: Bad direction")
     end
     direction = direction % 4
 end
+
+
+function move_fwd_to_pos(dist,dir,pos)
+    for a=1,dist,1 do
+        moveForward()
+    end
+    turn(dir)
+    pos = pos + dist
+    print("After move: ", pos)
+    return pos
+end
+
 
 ----------------- End pathfinding ------------------------
 
