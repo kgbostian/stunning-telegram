@@ -52,7 +52,6 @@ function MineControl.cut_square(size, dir)
     MineControl.turn_and_strip(dir, size)
     MineControl.turn_and_strip(dir, size)
     MineControl.turn_and_strip(dir, size)
-    MineControl.strip_hall_section(size)
 end
 
 function MineControl.cut_strip_mine(strip, starting_dir, size_of_mine)
