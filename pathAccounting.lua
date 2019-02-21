@@ -4,6 +4,7 @@
 --
 pathway = ''
 wayHome = ''
+direction = 0
 
 -- Reset variables --
 function resetPathways()
